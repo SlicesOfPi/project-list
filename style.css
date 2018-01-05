@@ -1,0 +1,146 @@
+#banner {
+height: 45px;
+display: inline-flex;
+margin-top: 10px;
+margin-left: 15px;
+margin-right: 15px;
+background-color: #444;
+min-width: 5px;
+/*
+vertical-align: center;
+align-items: center;
+justify-content: center;
+*/
+
+}
+
+body {
+background-color: #222;
+}
+.banner.link {
+  display:inline;
+  margin: 0;
+  padding-left: 5px;padding-right:5px;
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+  align-items: center;
+  text-decoration: none;
+  transition: 0.2s;
+  
+  
+}
+.banner.link:hover {
+  background-color: #111;
+}
+.banner.link p {
+  display: inline-block;
+  line-height: 16px;
+  height:16px;
+  color: #ddd;
+  font-size: 18px;
+  font-family: 'Roboto Mono', monospace;
+  justify-content: center;
+  vertical-align: middle;
+  
+}
+.banner a {
+  display:inline-block;
+}
+
+.home {
+  padding-left: 36px !important;
+  background-image: url(https://s18.postimg.org/qdlhtdpyh/houseimage.png);
+  background-repeat: no-repeat;
+  background-position: 9px center;
+  background-size: 18px;
+  
+}
+
+.green {
+  color: #6cd65c !important;
+}
+
+
+section#SlicesOfPi {
+  margin-top: 0;
+  margin-left: 15px;
+  font-size: 80px;
+  height: 80px;
+  font-family: sans-serif;
+  font-weight: bolder;
+  color: #69b55e;
+}
+
+#underscore {
+  display: inline;
+}
+#easter-egg-text {
+  text-decoration: none;
+  min-width: 0;
+  font-size: 80;
+  background-color: rgba(0,0,0,0); /* I do NOT feel bad for anyone using IE8 or earlier. */
+  border: none;
+  color: transparent; /* Sets the actual text color to none, same with the blinky line. */
+  text-shadow: 0 0 0 #69b55e; /* Text shadow right where the characters are. This makes them shown as opposed to that pesky insert blinky line */
+}
+#easter-egg-text:focus {
+  outline: none;
+}
+
+#project-list {
+  display: none;
+  opacity: 0;
+}
+#homelist {
+  
+
+
+}
+
+.list {
+  font-family: sans-serif;
+  transition: 0.2s;
+  width: 100%;
+  position: absolute;
+  top: 180px;
+  left: 25px;right: 25px;
+  bottom: 50px;
+
+}
+
+.list h1 {
+  color: #cfcfcf;
+  margin-left: 20vw;
+  font-size: 3.5em;
+
+}
+.list p {
+  color: #aaa;
+  margin-left: 10vw;
+  margin-right: 5vw;
+}
+
+.list a {
+  color: #f2a059;
+  text-decoration: underline;
+}
+.list a:hover {
+  color: #dd9352;
+}
+
+td {
+  padding-top: 5px;
+}
+th, td {
+  min-width: 125px;
+}
+table {
+  padding: 15px;
+  font-size: 22px;
+}
+.fork {
+  text-align: center;
+}

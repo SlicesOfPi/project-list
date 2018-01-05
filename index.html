@@ -1,0 +1,127 @@
+<!-- https://api.github.com/users/SlicesOfPi/repos -->
+<html>
+<head>
+	<title>SlicesOfPi</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+	<link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+	<section id="SlicesOfPi">
+		SlicesOfPi ~ $<span contenteditable="true" id="easter-egg-text" autofocus ></span><p id="underscore"></p>
+	</section>
+
+
+	<div id="banner">
+
+		<a id="home" class="banner link home" href="javascript:void();">
+			<p>
+				Home
+			</p>
+		</a>
+
+		<a id="projects" class="banner link" href="javascript:void();">
+			<p>
+				<p class="green">~ $<p>./Projects
+			</p>
+		</a>
+
+
+	</div>
+
+	<div class="list" id="project-list">
+		<h1>Projects</h1>
+		<p>
+			<table id="projecttable"><tr><th>Repo</th><th style="width:150px;">Fork?</th></tr></table>
+		</p>
+	</div>
+	<div class="list" id="homelist">
+		<h1>Home</h1>
+		<p>This is an overcomplicated, redudant list of my github projects but, it looks fancy and that's what counts. I only made this because I was bored and I saw something <i>similar</i> on someone elses github except it didn't rely on getting a javascript request from github API. To view my current github projects, either head over to my <a href="https://github.com/SlicesOfPi/">Github Profile</a> or click Profiles.</p>
+	</div>
+
+
+<script>
+var underscore = false;
+window.setInterval(function(){ // This could also likely be achieved with a CSS-animation. Disabling javascript is rare, and the page heavily depends on it anyways.
+	if(underscore){
+		document.getElementById('underscore').innerHTML = ""; // Other main option is to set style-display to none.
+		underscore = false;
+		setFocusToTextBox();
+	}
+	else{
+		document.getElementById('underscore').innerHTML = "_";
+		underscore = true;
+		setFocusToTextBox();
+	}
+},750);
+
+function setFocusToTextBox(){
+    document.getElementById("easter-egg-text").focus();
+}
+
+var time = 0;
+document.body.addEventListener("keypress", function(){
+	time = 2;
+});
+
+window.setInterval(function(){
+	if(time>0){
+		time--;
+	}
+	if(time==0){
+		if (document.getElementById('easter-egg-text').innerHTML.length > 0){
+			var easterEggHTML = document.getElementById('easter-egg-text').innerHTML;
+			var curHTML = easterEggHTML.substring(0, easterEggHTML.length - 1);
+			document.getElementById('easter-egg-text').innerHTML = curHTML;
+
+		}
+	}
+}, 1000);
+
+document.getElementById('home').addEventListener("click", function(){
+	document.getElementById('project-list').style.opacity = 0;
+	document.getElementById('homelist').style.display = 'block';
+	window.setTimeout(function(){
+		document.getElementById('homelist').style.opacity = 1;
+		window.setTimeout(function(){document.getElementById('project-list').style.display = 'none';},200);
+	},200);
+});
+document.getElementById('projects').addEventListener("click", function(){
+	document.getElementById('homelist').style.opacity = 0;
+	document.getElementById('project-list').style.display = 'block';
+	window.setTimeout(function(){
+		document.getElementById('project-list').style.opacity = 1;
+		window.setTimeout(function(){document.getElementById('homelist').style.display = 'none';},200);
+	},200);
+});
+var jsonStr = '';
+var objectData;
+var xhttp = new XMLHttpRequest();
+var warn = false; // So it doesn't redundantly try and send the message every time it attempts to make the connection again.
+xhttp.onreadystatechange = function() {
+	if (this.readyState == 4 && this.status == 200) {
+		jsonData = xhttp.responseText;
+		objectData = JSON.parse(jsonData);
+		for(index in objectData){
+			key = objectData[index];
+			document.getElementById('projecttable').innerHTML += '<tr><td><a href="'+key['html_url']+'">'+key['name']+'</a></td ><td class="fork">'+key['fork']+'</td></tr>';
+		}
+
+	}
+	else {
+		if(warn == false){
+			document.getElementById('projecttable').style.display = 'none';
+			document.getElementById("project-list").innerHTML += "<p>Notice: github limits anonymouse API requests. Retry in an hour or two. (Or other network error. XMLHttpRequest Status code: "+this.status+"). You can also check console for errors. (Right click --> Inspect Element --> Network for most browsers. Chrome also utilizes Ctrl+Shift+I, and firefox Ctrl+Q.</p>"
+			warn = true;
+		}
+		
+	}
+};
+xhttp.open("GET", "https://api.github.com/users/SlicesOfPi/repos", true);
+xhttp.send();
+
+</script>
+
+</body>
+</html>
