@@ -32,7 +32,8 @@
 	<div class="list" id="project-list">
 		<h1>Projects</h1>
 		<p>
-			<table id="projecttable"><tr><th>Repo</th><th style="width:150px;">Fork?</th></tr></table>
+			<p id="warn">Notice: github limits anonymouse API requests. Retry in an hour or two. (Or other network error. XMLHttpRequest Status code: "+this.status+"). You can also check console for errors. (Right click --> Inspect Element --> Network for most browsers. Chrome also utilizes Ctrl+Shift+I, and firefox Ctrl+Q.</p>
+			<table style="display: none;" id="projecttable"><tr><th>Repo</th><th style="width:150px;">Fork?</th></tr></table>
 		</p>
 	</div>
 	<div class="list" id="homelist">
@@ -106,18 +107,12 @@ xhttp.onreadystatechange = function() {
 		for(index in objectData){
 			key = objectData[index];
 			document.getElementById('projecttable').innerHTML += '<tr><td><a href="'+key['html_url']+'">'+key['name']+'</a></td ><td class="fork">'+key['fork']+'</td></tr>';
+			document.getElementById('projecttable').style.display = "block";
+			document.getElementById('warn').style.display = "none";
 		}
 
 	}
-	else {
-		if(warn == false){
-			document.getElementById('projecttable').style.display = 'none';
-			document.getElementById("project-list").innerHTML += "<p>Notice: github limits anonymouse API requests. Retry in an hour or two. (Or other network error. XMLHttpRequest Status code: "+this.status+"). You can also check console for errors. (Right click --> Inspect Element --> Network for most browsers. Chrome also utilizes Ctrl+Shift+I, and firefox Ctrl+Q.</p>"
-			warn = true;
-		}
-		
-	}
-};
+}
 xhttp.open("GET", "https://api.github.com/users/SlicesOfPi/repos", true);
 xhttp.send();
 
